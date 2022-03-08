@@ -7,4 +7,4 @@ date: 2022-01-13
 
 ---
 
-# Some text
+Nothing special.
