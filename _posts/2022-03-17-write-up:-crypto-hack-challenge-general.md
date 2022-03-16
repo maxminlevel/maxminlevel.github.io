@@ -3,18 +3,18 @@ layout: post
 bg: "/ctf.jpg"
 title: "Write up: Crypto Hack General"
 summary: "The first step towards knowledge is to know that we are ignorant. - Richard Cecil"
-tags: ['ctf']
+tags: ['CTF']
 date: 2022-03-17
 
 ---
 
-This week I done a quiz from Infomation Security course. Through this I've learned a lot of knowdledge like how to use pwntools, pwnlib, more about XOR, modulo and RSA. After that is my approach to solve 19 exercises in this quiz.
+This week I done a quiz from Infomation Security course. Through this I've learned a lot of knowdledge like how to use pwntools, pwnlib, more about XOR, modulo and RSA. This is my approach to solve 19 exercises in this quiz.
 
 It in consists of:
-* Encoding
-* XOR
-* Mathematics
-* Data formats
+* [Encoding](#encoding)
+* [XOR](#xor)
+* [Mathematics](#-mathematics)
+* [Data formats](#data-formats)
 
 ![Lemur](/assets/images/crypto-general/sol.png)
 ### Encoding
@@ -35,7 +35,10 @@ for i in c:
     s += chr(i)
 print(s) 
 ```
-Flag: crypto{You_will_be_working_with_hex_strings_a_lot}
+Flag: 
+```
+crypto{You_will_be_working_with_hex_strings_a_lot}
+```
 #### Hex
 <!-- When we encrypt something the resulting ciphertext commonly has bytes which are not printable ASCII characters. If we want to share our encrypted data, it's common to encode it into something more user-friendly and portable across different systems. -->
 
@@ -50,7 +53,10 @@ c = "63727970746f7b596f755f77696c6c5f62655f776f726b696e675f776974685f6865785f737
 s = bytes.fromhex(c)
 print(s)
 ```
-Flag: crypto{You_will_be_working_with_hex_strings_a_lot}
+Flag: 
+```
+crypto{You_will_be_working_with_hex_strings_a_lot}
+```
 
 #### Base64
 <!-- Another common encoding scheme is Base64, which allows us to represent binary data as an ASCII string using 64 characters. One character of a Base64 string encodes 6 bits, and so 4 characters of Base64 encode three 8-bit bytes.
@@ -59,7 +65,9 @@ Base64 is most commonly used online, so binary data such as images can be easily
 
 Take the below hex string, decode it into bytes and then encode it into Base64.
 
+```
 72bca9b68fc16ac7beeb8f849dca1d8a783e8acf9679bf9269f7bf
+```
 ```python
 c = "72bca9b68fc16ac7beeb8f849dca1d8a783e8acf9679bf9269f7bf"
 s1 = bytes.fromhex(c)
@@ -69,7 +77,9 @@ import base64
 s2 = base64.b64encode(s1)
 print(s2)
 ```
-Flag: crypto/Base+64+Encoding+is+Web+Safe/
+Flag: 
+```crypto/Base+64+Encoding+is+Web+Safe/
+```
 #### Bytes and Big Integers
 <!-- Cryptosystems like RSA works on numbers, but messages are made up of characters. How should we convert our messages into numbers so that mathematical operations can be applied? 
 
@@ -93,7 +103,10 @@ from Crypto.Util.number import *
 c = "11515195063862318899931685488813747395775516287289682636499965282714637259206269"
 long_to_bytes(c)
 ```
-Flag: crypto{3nc0d1n6_4ll_7h3_w4y_d0wn}
+Flag: 
+```
+crypto{3nc0d1n6_4ll_7h3_w4y_d0wn}
+```
 
 #### Encoding Challenge
 Now you've got the hang of the various encodings you'll be encountering, let's have a look at automating it. Can you pass all 100 levels to get the flag?
@@ -163,7 +176,10 @@ for i in range(0, 101):
 
     json_send(to_send)
 ```
-Flag: crypto{3nc0d3_d3c0d3_3nc0d3}
+Flag: 
+```
+crypto{3nc0d3_d3c0d3_3nc0d3}
+```
 
 ### XOR
 --- 
@@ -183,7 +199,10 @@ Normal way, when xor we would padding or xor one-by-one but the function XOR by 
 import pwnlib
 s = pwnlib.util.fiddling.xor("label", 13).decode()
 ```
-Flag: crypto{aloha}
+Flag: 
+```
+crypto{aloha}
+```
 
 #### XOR Properties
 <!-- In the last challenge, you saw how XOR worked at the level of bits. In this one, we're going to cover the properties of the XOR operation and then use them to undo a chain of operations that have encrypted a flag. Gaining an intuition for how this works will help greatly when you come to attacking real cryptosystems later, especially in the block ciphers category.
@@ -214,14 +233,17 @@ FK123 =  bytes.fromhex("04ee9855208a2cd59091d04767ae47963170d1660df7f56f5faf")
 F = pwnlib.util.fiddling.xor(FK123, KEY23, KEY1)
 print(F)
 ```
-Flag: crypto{x0r_i5_ass0c1at1v3}
+Flag: 
+```
+crypto{x0r_i5_ass0c1at1v3}
+```
 #### Favourite byte
 <!-- For the next few challenges, you'll use what you've just learned to solve some more XOR puzzles. -->
 
 I've hidden some data using XOR with a single byte, but that byte is a secret. Don't forget to decode from hex first.
-
+```
 73626960647f6b206821204f21254f7d694f7624662065622127234f726927756d
-
+```
 After decode the text from hex to bytes, I bruteforce it with a integer (limit in value of 1 byte).
 ```python
 c = "73626960647f6b206821204f21254f7d694f7624662065622127234f726927756d"
@@ -235,12 +257,17 @@ for i in range(pow(2,9)):
 # crypto{0x10_15_my_f4v0ur173_by7e}
 # 16
 ```
-Flag: crypto{0x10_15_my_f4v0ur173_by7e}
+Flag: 
+```
+crypto{0x10_15_my_f4v0ur173_by7e}
+```
 
 #### You either know, XOR you don't
 I've encrypted the flag with my secret key, you'll never be able to guess it.
 
+```
 0e0b213f26041e480b26217f27342e175d0e070a3c5b103e2526217f27342e175d0e077e263451150104
+```
 
 The flag must start with "crypto{", I XOR the encrypted message with this word to have the key. The key is "myXORke", but when XOR it with cipher I didn't have } at the last position. Then I append the y character to key. And tada !!!
 ```python
@@ -253,7 +280,10 @@ key += 'y'
 s = pwnlib.util.fiddling.xor(key.encode(), s1).decode()
 print(s)
 ```
-Flag: crypto{1f_y0u_Kn0w_En0uGH_y0u_Kn0w_1t_4ll}
+Flag: 
+```
+crypto{1f_y0u_Kn0w_En0uGH_y0u_Kn0w_1t_4ll}
+```
 #### Lemur XOR
 I've hidden two cool images by XOR with the same secret key so you can't see them!
 * Lemur image
@@ -277,7 +307,10 @@ Solve image
 
 ![Solve](../assets/images/crypto-general/solve.png)
 
-Flag: crypto{X0Rly_n0t!}
+Flag: 
+```
+crypto{X0Rly_n0t!}
+```
 ### Mathematics
 ---
 #### Greatest Common Divisor
@@ -316,20 +349,20 @@ The extended Euclidean algorithm is an efficient way to find integers u,v such t
 
 a * u + b * v = gcd(a,b) -->
 
-Using the two primes p = 26513, q = 32321, find the integers u,v such that
+Using the two primes p = 26513, q = 32321, find the integers u,v such that:
 
+```
 p * u + q * v = gcd(p,q)
+```
 
 Enter whichever of u and v is the lower number as the flag.
 ```python
 def gcdExtended(a, b): 
-    # Base Case 
     if a == 0 :  
         return b,0,1
              
     gcd,x1,y1 = gcdExtended(b%a, a) 
      
-    # Update x and y using results of recursive call 
     x = y1 - (b//a) * x1 
     y = x1 
      
@@ -337,10 +370,8 @@ def gcdExtended(a, b):
 
 p = 26513
 q = 32321
-gcd, u, v = gcdExtended(p, q)
-# (1, 10245, -8404)
-print(min(u, v))
-# -8404
+gcd, u, v = gcdExtended(p, q) # (1, 10245, -8404)
+print(min(u, v)) # -8404
 ```
 Result: -8404
 
@@ -387,7 +418,7 @@ gcdExtended(3, 13)
 Result: -4
 
 ### DATA FORMATS
---- 
+---     
 #### Privacy-Enhanced Mail?
 <!-- As we've seen in the encoding section, cryptography involves dealing with data in a wide variety of formats: big integers, raw bytes, hex strings and more. A few structured formats have been standardised to help send and receive cryptographic data. It helps to be able to recognise and manipulate these common data formats.
 
@@ -403,9 +434,14 @@ The data that gets base64-encoded is DER-encoded ASN.1 values. Confused? Here is
 
 Extract the private key d as a decimal integer from this PEM-formatted RSA key.
 [privacy_enhanced_mail.pem](https://cryptohack.org/static/challenges/privacy_enhanced_mail_1f696c053d76a78c2c531bb013a92d4a.pem)
+
+PEM is a format file to encapsulate the encrypted key. To get the key we read the pem file on asn1 format. 
+[RSA_DER](../assets/images/crypto-general/rsa_der_format.png)
+
 Run command below to extract info from pem file. It's include: 
-```
-openssl asn1parse -i -in privacy_enhanced_mail.pem
+
+```python
+!openssl asn1parse -i -in privacy_enhanced_mail.pem
 # Result
 0:d=0  hl=4 l=1187 cons: SEQUENCE          
     4:d=1  hl=2 l=   1 prim:  INTEGER           :00
@@ -478,7 +514,9 @@ The ssh-keygen command is used to produce these public-private keypairs. -->
 Extract the modulus n as a decimal integer from Bruce's SSH public key.
 
 [bruce_rsa.pub](https://cryptohack.org/static/challenges/bruce_rsa_6e7ecd53b443a97013397b1a1ea30e14.pub)
-Same the above challenge.
+
+I use ssh-keygen to get the pem format. Then do the same CERTainly not challenge.
+
 ```python
 !ssh-keygen -f bruce_rsa.pub -e -m PKCS8 >> bruce_rsa.pem
 !openssl asn1parse -i -in bruce_rsa.pem
@@ -514,6 +552,8 @@ Attached is an RSA public key in PEM format. -->
 Find the subdomain of cryptohack.org which uses these parameters in its TLS certificate, and visit that subdomain to obtain the flag.
 
 [transparency.pem](https://cryptohack.org/static/challenges/transparency_afff0345c6f99bf80eab5895458d8eab.pem)
+
+TLS search commonly used sha256 encryption, em will generate sha256 file after converting pem file to der file. Then I use https://search.censys.io/ to find the domain using this certificate.
 
 Web: [Subdomain](https://thetransparencyflagishere.cryptohack.org/)
 
