@@ -8,12 +8,12 @@ date: 2022-03-17
 
 ---
 
-This week I done a quiz from Infomation Security course. Through this I've learned a lot of knowdledge like how to use pwntools, pwnlib, more about XOR, modulo and RSA. This is my approach to solve 19 exercises in this quiz.
+This week I did a quiz from Infomation Security course. Through this I've learned a lot of knowdledge like how to use pwntools, pwnlib, more about XOR, modulo and RSA. This is my approach to solve 19 exercises in this quiz.
 
 It in consists of:
 * [Encoding](#encoding)
 * [XOR](#xor)
-* [Mathematics](#-mathematics)
+* [Mathematics](#mathematics)
 * [Data formats](#data-formats)
 
 ![Lemur](/assets/images/crypto-general/sol.png)
@@ -78,7 +78,8 @@ s2 = base64.b64encode(s1)
 print(s2)
 ```
 Flag: 
-```crypto/Base+64+Encoding+is+Web+Safe/
+```
+crypto/Base+64+Encoding+is+Web+Safe/
 ```
 #### Bytes and Big Integers
 <!-- Cryptosystems like RSA works on numbers, but messages are made up of characters. How should we convert our messages into numbers so that mathematical operations can be applied? 
@@ -269,7 +270,7 @@ I've encrypted the flag with my secret key, you'll never be able to guess it.
 0e0b213f26041e480b26217f27342e175d0e070a3c5b103e2526217f27342e175d0e077e263451150104
 ```
 
-The flag must start with "crypto{", I XOR the encrypted message with this word to have the key. The key is "myXORke", but when XOR it with cipher I didn't have } at the last position. Then I append the y character to key. And tada !!!
+The flag must start with "crypto{", I XOR the encrypted message with this word to have the key. The key is "myXORke", but when XOR it with cipher I didn't have } at the last position. Then I append the y character to key. Tada !!!
 ```python
 c = "0e0b213f26041e480b26217f27342e175d0e070a3c5b103e2526217f27342e175d0e077e263451150104"
 s1 = bytes.fromhex(c)
@@ -293,7 +294,7 @@ I've hidden two cool images by XOR with the same secret key so you can't see the
 
 ![Flag](../assets/images/crypto-general/flag.png)
 
-The png file is a structure file, we only need to xor the 2d-array pixel in data part. I use cv2 bitwise to do.
+The png file is a structure file, we only need to xor the 2d-array pixel in data part. I use cv2 bitwise xor to do.
 ```python
 import cv2
 
