@@ -9,8 +9,7 @@
 title: Maxminlevel Blog
 email: vvtoan35@gmail.com
 description: > # this means to ignore newlines until "baseurl:"
-  Nash Reilly is an electrical engineer in Boston, MA who has 
-  more or less chosen not to edit this line in _config.yml. 
+  Maxminlevel Blog is a blog about programming, technology, and life.
 baseurl: "" # the subpath of your site, e.g. /blog
 lang: "en"
 url: "https://maxminlevel.github.io" # the base hostname & protocol for your site
