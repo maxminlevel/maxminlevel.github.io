@@ -7,7 +7,8 @@ date: 2024-08-15
 
 ---
 
-<!DOCTYPE html>
+My bookmarklet list
+
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -86,6 +87,13 @@ date: 2024-08-15
         href="javascript:(function()%7B(function()%7Bfunction _get(key)%7Breturn localStorage.getItem(key)%3D%3D%3D'visited'%7Dfunction isEmpty(value)%7Bvar i%3D0%3Bfor(%3Bi<list.length%3Bi%2B%2B)%7Bvar file%3Dlist%5Bi%5D%3Bif(file.type%3D%3D%3D'domain'%26%26(new RegExp('%5E'%2Bfile.value.replace(%2F%5C*%2Fg%2C'.*')%2B'%24')).test(value))return true%7Dreturn false%7Dfunction provide(uris)%7Bif(uris%26%26Array.isArray(uris))list%3Duris%7Dfunction load()%7Bvar uris%3DJSON.parse(localStorage.getItem('config'))%3Bprovide(uris)%7Dfunction callback()%7BlocalStorage.setItem('config'%2CJSON.stringify(list))%7Dfunction handleResult(result)%7Bvar doc%3D%0A%7B'type'%3A'domain'%2C'value'%3Aresult%2C'tag'%3A%5B'tab'%5D%7D%3Blist.push(doc)%3Bcallback()%7Dfunction clone(dataAndEvents)%7Blist%3DdataAndEvents%3Bcallback()%7Dvar list%3D%5B%5D%3Bload()%3Bvar asserterNames%3Ddocument.querySelectorAll('.titleline')%3BasserterNames.forEach(function(c)%7Bvar link%3Dc.querySelector('a')%3Bif(link%26%26link.href)%7Bvar path%3Dlink.href%3Bif(!_get(path)%26%26!isEmpty(path))%7Bwindow.open(path%2C'_blank')%3BlocalStorage.setItem(path%2C'visited')%7Delse console.log('Link excluded or already visited%3A'%2Cpath)%7Delse console.log('No valid href found.')%7D)%7D)()%3B%7D)()%3B"
         >Hancker new with config skip tag</a
       >
+      <div style="white-space: nowrap; overflow-x: auto; max-width: 100%; padding: 10px;">
+    Example config
+    <div style="display: inline; border: 3px solid #fff;">
+        [{"type":"domain","value":"https://arxiv.org/*","tag":["science","paper"]},{"type":"domain","value":"https://theguardian.com/*","tag":["magazine"]},{"type":"domain","value":"https://*medium.com/","tag":["science","blockIP"]},{"type":"domain","value":"https://www.ycombinator.com/*","tag":["YC"]},{"type":"importUrl","value":"","tag":["failed","CORS"]},{"type":"domain","value":"","tag":["added"]},{"type":"domain","value":"*/doi/*","tag":["science","paper"]},{"type":"domain","value":"*/github.com/*","tag":["code"]},{"type":"domain","value":"*/twitter.com/*","tag":["social"]},{"type":"domain","value":"*/pubmed./*","tag":["medicine"]},{"type":"domain","value":"*/nature.com/*","tag":["paper"]}]
+        </div>
+    </div>
+    
     </div>
   </body>
 </html>
