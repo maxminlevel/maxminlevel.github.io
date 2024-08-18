@@ -1,6 +1,7 @@
 ---
 layout: post
 title: "My bookmarklet"
+bg: "/misc/yak-shaving.jpg"
 summary: "Just yak shaving"
 tags: ['misc']
 date: 2024-08-15
@@ -93,7 +94,31 @@ My bookmarklet list
         [{"type":"domain","value":"https://arxiv.org/*","tag":["science","paper"]},{"type":"domain","value":"https://theguardian.com/*","tag":["magazine"]},{"type":"domain","value":"https://*medium.com/","tag":["science","blockIP"]},{"type":"domain","value":"https://www.ycombinator.com/*","tag":["YC"]},{"type":"importUrl","value":"","tag":["failed","CORS"]},{"type":"domain","value":"","tag":["added"]},{"type":"domain","value":"*/doi/*","tag":["science","paper"]},{"type":"domain","value":"*/github.com/*","tag":["code"]},{"type":"domain","value":"*/twitter.com/*","tag":["social"]},{"type":"domain","value":"*/pubmed./*","tag":["medicine"]},{"type":"domain","value":"*/nature.com/*","tag":["paper"]}]
         </div>
     </div>
-    
+
+    <a
+      style="text-decoration: none"
+      class="script"
+      cmt="encode script and convert double quote to single quote"
+      href="javascript:jQuery('.question-rankings').each(function(){var n;$(this).find('input').get(4).checked=!0});jQuery('.question-answers').each(function(){var n;$(this).find('input').get(4).checked=!0});"
+      >Đánh Giá Người Học Random</a
+    >
+
+    <a
+      style="text-decoration: none"
+      class="script"
+      cmt="encode script and convert double quote to single quote"
+      href="javascript:document.title=prompt("Enter page title")??document.title;"
+      >Đổi tên page</a
+    >
+
+     <a
+      style="text-decoration: none"
+      class="script"
+      cmt="encode script and convert double quote to single quote"
+      href="javascript:setTimeout(()=>location.reload(), prompt('Reload the page in seconds:')*1000)"
+      >Auto reload after x seconds</a
+    >
+
     </div>
   </body>
 </html>
