@@ -12,7 +12,7 @@ description: > # this means to ignore newlines until "baseurl:"
   Maxminlevel Blog is a blog about programming, technology, and life.
 baseurl: "" # the subpath of your site, e.g. /blog
 lang: "en"
-url: "https://maxminlevel.github.io" # the base hostname & protocol for your site
+url: "https://maxminlevel.site" # the base hostname & protocol for your site
 twitter_username: maxminlevel
 github_username:  maxminlevel
 
