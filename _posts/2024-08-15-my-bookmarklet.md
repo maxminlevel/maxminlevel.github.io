@@ -1,11 +1,10 @@
 ---
 layout: post
-title: "My bookmarklet"
-bg: "/misc/yak-shaving.jpg"
-summary: "Just yak shaving"
+title: 'My bookmarklet'
+bg: '/misc/yak-shaving.jpg'
+summary: 'Just yak shaving'
 tags: ['misc']
 date: 2024-08-15
-
 ---
 
 My bookmarklet list
@@ -64,6 +63,7 @@ My bookmarklet list
         background-color: #eff1f5;
       }
     </style>
+
   </head>
   <body>
     <div class="main">
@@ -85,7 +85,7 @@ My bookmarklet list
         style="text-decoration: none"
         class="script"
         cmt="encode script and convert double quote to single quote"
-        href="javascript:(function()%7B(function()%7Bfunction _get(key)%7Breturn localStorage.getItem(key)%3D%3D%3D'visited'%7Dfunction isEmpty(value)%7Bvar i%3D0%3Bfor(%3Bi<list.length%3Bi%2B%2B)%7Bvar file%3Dlist%5Bi%5D%3Bif(file.type%3D%3D%3D'domain'%26%26(new RegExp('%5E'%2Bfile.value.replace(%2F%5C*%2Fg%2C'.*')%2B'%24')).test(value))return true%7Dreturn false%7Dfunction provide(uris)%7Bif(uris%26%26Array.isArray(uris))list%3Duris%7Dfunction load()%7Bvar uris%3DJSON.parse(localStorage.getItem('config'))%3Bprovide(uris)%7Dfunction callback()%7BlocalStorage.setItem('config'%2CJSON.stringify(list))%7Dfunction handleResult(result)%7Bvar doc%3D%0A%7B'type'%3A'domain'%2C'value'%3Aresult%2C'tag'%3A%5B'tab'%5D%7D%3Blist.push(doc)%3Bcallback()%7Dfunction clone(dataAndEvents)%7Blist%3DdataAndEvents%3Bcallback()%7Dvar list%3D%5B%5D%3Bload()%3Bvar asserterNames%3Ddocument.querySelectorAll('.titleline')%3BasserterNames.forEach(function(c)%7Bvar link%3Dc.querySelector('a')%3Bif(link%26%26link.href)%7Bvar path%3Dlink.href%3Bif(!_get(path)%26%26!isEmpty(path))%7Bwindow.open(path%2C'_blank')%3BlocalStorage.setItem(path%2C'visited')%7Delse console.log('Link excluded or already visited%3A'%2Cpath)%7Delse console.log('No valid href found.')%7D)%7D)()%3B%7D)()%3B"
+        href="javascript:(function()%7Bvar lc%3DlocalStorage%3Bvar m%3Dlc.getItem('type')%3Bfunction isMt(val)%7Bvar i%3D0%3Bfor(%3Bi<ls.length%3Bi%2B%2B)%7Bvar file%3Dls%5Bi%5D%3Bif(file.type%3D%3D%3D'domain'%26%26new RegExp('%5E'%2Bfile.value.replace(%2F%5C*%2Fg%2C'.*')%2B'%24').test(val))%0Areturn!0%7D%0Areturn!1%7D%0Avar vs%3D'visited'%3Bvar ls%3D%5B%5D%3Bvar uris%3DJSON.parse(lc.getItem('config'))%3Bif(uris%26%26Array.isArray(uris))ls%3Duris%3Bvar ns%3Ddocument.querySelectorAll('.titleline')%3Bns.forEach(function(c)%7Bvar path%3Dc.querySelector('a').href%3Bif(lc.getItem(path)!%3D%3Dvs%26%26(m%3D%3D%3D'match'%3FisMt(path)%3A!isMt(path)))%7Bwindow.open(path%2C'_blank')%3Blc.setItem(path%2Cvs)%7D%7D)%7D)()"
         >Hancker new with config skip tag
       </a>
 
@@ -104,7 +104,7 @@ My bookmarklet list
       >Đánh Giá Người Học Random
     </a>
     <div></div>
-    
+
     <a
       style="text-decoration: none"
       class="script"
@@ -113,7 +113,7 @@ My bookmarklet list
       >Đổi tên page
     </a>
     <div></div>
-    
+
     <a
       style="text-decoration: none"
       class="script"
@@ -123,5 +123,6 @@ My bookmarklet list
     </a>
 
     </div>
+
   </body>
 </html>
